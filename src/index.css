@@ -5,9 +5,31 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url(../public/weather.jpg);
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover; 
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.forecast-header {
+  margin: 70px 0 40px;
+}
+
+.forecast-card {
+  border: 1px grey solid;
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+img {
+  border-radius: 20px;
 }

@@ -1,0 +1,36 @@
+input {
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    transition: all .2s ease-in-out; 
+    margin-top: 80px;
+}
+
+input:hover {
+    transform: scale(1.1);
+}
+
+::placeholder {
+    text-align: center; 
+}
+
+button {
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 140px;
+    height: 30px;
+    margin: 5px 5px 0px 5px;
+    transition: all .2s ease-in-out; 
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.small-font {
+    font-size: 14px;
+    margin-bottom: 50px;
+}
