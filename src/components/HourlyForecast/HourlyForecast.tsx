@@ -38,13 +38,13 @@ function HourlyForecast({ singleHourlyForecast }: {singleHourlyForecast: WeeklyH
     }, [startTime, icon])
 
     return (
-        <div className='forecast-card'>
-            <h3>{regularTime}</h3>
-            <p>{startTime.substring(0, 10)}</p>
-            <p>Forecast: {shortForecast}</p>
-            <p>Temperature: {temperature} {temperatureUnit}</p>
-            <p>Wind speed and direction: {windSpeed} {windDirection}</p>
-            <img src={weatherImageUrl} alt="weather"></img>
+        <div className='forecast-card' data-testid='hourly-forecast'>
+            <h3 data-testid='hourly-forecast-time'>{regularTime}</h3>
+            <p data-testid='hourly-forecast-date'>{startTime.substring(0, 10)}</p>
+            <p data-testid='hourly-forecast-forecast'>Forecast: {shortForecast}</p>
+            <p data-testid='hourly-forecast-temperature'>Temperature: {temperature} {temperatureUnit}</p>
+            <p data-testid='hourly-forecast-wind'>Wind speed and direction: {windSpeed} {windDirection}</p>
+            <img src={weatherImageUrl} alt="weather" data-testid='hourly-forecast-image'></img>
         </div>
     )
 }

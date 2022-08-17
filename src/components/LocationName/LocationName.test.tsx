@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import LocationName from './LocationName';
 import { Provider } from 'react-redux'
 import { ForecastDataPropertiesType, LocationDataType } from '../../types';
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
@@ -82,9 +82,14 @@ const store = configureStore({
     },
 })
 
-describe('<App />', ()=>{
-  test('renders app component', ()=>{
-    render(<Provider store={store}><App /></Provider>)
-    screen.getByTestId('app')
-  })
+describe('<LocationName />', ()=>{
+    test('renders first-location-text', ()=>{
+        render(<Provider store={store}><LocationName /></Provider>)
+        screen.getByTestId('first-location-text')
+    })
+
+    test('renders second-location-text', ()=>{
+        render(<Provider store={store}><LocationName /></Provider>)
+        screen.getByTestId('second-location-text')
+    })
 })

@@ -18,7 +18,7 @@ function SearchedHourlyForecast(){
 
     return (
         <div>
-            <h2 className="forecast-header">Hourly Forecast</h2>
+            <h2 className="forecast-header" data-testid='searched-hourly-forecast'>Hourly Forecast</h2>
             {(hourlyForecast.length !== 0) &&
                 hourlyForecast.slice(0, 20).map((singleHourlyForecast, key) => {
                     return <HourlyForecast singleHourlyForecast={singleHourlyForecast} key={singleHourlyForecast.number}/>

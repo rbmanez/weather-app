@@ -1,35 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import SearchedWeeklyForecast from './SearchedWeeklyForecast';
 import { Provider } from 'react-redux'
-import { ForecastDataPropertiesType, LocationDataType } from '../../types';
+import { ForecastDataPropertiesType } from '../../types';
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-const initialLocationDataStateValue: LocationDataType = {
-    boundingbox: ['38.7154517', '39.0351247', '-104.9170862', '-104.5999135'],
-    class: "boundary",
-    display_name: "Colorado Springs, El Paso County, Colorado, United States",
-    icon: "https://nominatim.openstreetmap.org/ui/mapicons/poi_boundary_administrative.p.20.png",
-    importance: 0.8867648050225984,
-    lat: "38.8339578",
-    licence: "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
-    lon: "-104.825348",
-    osm_id: 113141,
-    osm_type: "relation",
-    place_id: 297983635,
-    type: "administrative",
-}
-
-const locationDataSlice = createSlice({
-    name: 'locationData',
-    initialState: {
-        value: initialLocationDataStateValue
-    },
-    reducers: {
-        locationData: (state, action: PayloadAction<LocationDataType>) => {
-            state.value = action.payload
-        }
-    }
-})
 
 const initialForecastDataPropertiesStateValue: ForecastDataPropertiesType = {
     id: "https://api.weather.gov/points/38.834,-104.8253",
@@ -77,14 +50,13 @@ const forecastDataPropertiesSlice = createSlice({
 
 const store = configureStore({
     reducer: {
-        forecastDataProperties: forecastDataPropertiesSlice.reducer,
-        locationData: locationDataSlice.reducer
+        forecastDataProperties: forecastDataPropertiesSlice.reducer
     },
 })
 
-describe('<App />', ()=>{
-  test('renders app component', ()=>{
-    render(<Provider store={store}><App /></Provider>)
-    screen.getByTestId('app')
-  })
+describe('<SearchedWeeklyForecast />', ()=>{
+    test('renders searched-weekly-forecast', ()=>{
+        render(<Provider store={store}><SearchedWeeklyForecast /></Provider>)
+        screen.getByTestId('searched-weekly-forecast')
+    })
 })

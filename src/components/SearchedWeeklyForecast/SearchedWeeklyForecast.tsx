@@ -18,7 +18,7 @@ function SearchedWeeklyForecast(){
 
     return (
         <div>
-            <h2 className='forecast-header'>Weekly Forecast</h2>
+            <h2 className='forecast-header' data-testid='searched-weekly-forecast'>Weekly Forecast</h2>
             {weeklyForecast.length !== 0 &&
                 weeklyForecast.map((singleDayForecast, key) => {
                     return <WeeklyForecast singleDayForecast={singleDayForecast} key={singleDayForecast.number}/>

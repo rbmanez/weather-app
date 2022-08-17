@@ -17,13 +17,13 @@ function WeeklyForecast({ singleDayForecast }: {singleDayForecast: WeeklyHourlyF
     }, [icon])
 
     return (
-        <div className="forecast-card">
-            <h3 className="forecast-subheader">{name}</h3>
-            <p>{startTime.substring(0, 10)}</p>
-            <p>Forecast: {detailedForecast}</p>
-            <p>Temperature: {temperature} {temperatureUnit}</p>
-            <p>Wind speed and direction: {windSpeed} {windDirection}</p>
-            <img src={weatherImageUrl} alt="weather"></img>
+        <div className="forecast-card" data-testid="weekly-forecast">
+            <h3 className="forecast-subheader" data-testid="weekly-forecast-name">{name}</h3>
+            <p data-testid="weekly-forecast-time">{startTime.substring(0, 10)}</p>
+            <p data-testid="weekly-forecast-forecast">Forecast: {detailedForecast}</p>
+            <p data-testid="weekly-forecast-temperature">Temperature: {temperature} {temperatureUnit}</p>
+            <p data-testid="weekly-forecast-wind">Wind speed and direction: {windSpeed} {windDirection}</p>
+            <img src={weatherImageUrl} alt="weather" data-testid="weekly-forecast-image"></img>
         </div>
     )
 }

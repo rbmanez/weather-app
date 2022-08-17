@@ -90,7 +90,7 @@ function App() {
   }, [performSearch, currentLatitude, currentLongitude, dispatch, locationData.lat, locationData.lon])
 
   return (
-    <div className="App">
+    <div className="App" data-testid="app">
       <h1>WEATHER APP</h1>
 
       {(currentLatitude !== '' && currentLongitude !== '') ?
