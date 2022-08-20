@@ -2,14 +2,12 @@ import { ForecastData, WeeklyHourlyForecast, LocationDataType } from "./types"
 
 async function fetchURL(url: string){
     const response = await fetch(url)
-    return await response.json()
+    return response.json()
 }
-
-export async function fetchAllForecast(url: string){
-    const data: ForecastData = await fetchURL(url)
+export async function fetchAllForecast(latitude: string, longitude: string){
+    const data: ForecastData = await fetchURL(`https://api.weather.gov/points/${latitude},${longitude}`)
     return data.properties
 }
-
 export async function fetchWeeklyOrHourlyForecast(url: string){
     const data: WeeklyHourlyForecast = await fetchURL(url)
     return data.properties.periods

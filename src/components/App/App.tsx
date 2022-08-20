@@ -7,7 +7,6 @@ import Search from '../Search/Search';
 import { fetchAllForecast, fetchSearchedLocation } from '../../api';
 import { forecastDataPropertiesActions } from '../../features/forecastDataProperties/forecastDataPropertiesSlice'
 import { locationDataActions } from '../../features/locationData/locationDataSlice'
-
 import { useAppSelector, useAppDispatch } from '../../hooks'
 
 function App() {
@@ -22,6 +21,7 @@ function App() {
   const [searchWeeklyForecast, setSearchWeeklyForecast] = useState<boolean>(false)
   const [serachHourlyForecast, setSearchHourlyForecast] = useState<boolean>(false)
   const [hasFetchError, setHasFetchError] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   function onSubmitHourlyForecast(){
     setSearchHourlyForecast(true)
@@ -42,6 +42,27 @@ function App() {
   function showPosition(position: any) {
     setCurrentLatitude(position.coords.latitude)
     setCurrentLongitude(position.coords.longitude)
+    setIsLoading(false)
+  }
+
+  function renderMainAppContent(){
+    return(
+      <div className="App" data-testid="app">
+        <h1>WEATHER APP</h1>
+
+        {isLoading ?
+          <h2>Loading...</h2> :
+          <Search onChangeSetSearchedLocation={onChangeSetSearchedLocation} onSubmitHourlyForecast={onSubmitHourlyForecast} onSubmitWeeklyForecast={onSubmitWeeklyForecast} />}
+
+        {!hasFetchError ?
+          <div>
+            {(searchWeeklyForecast || serachHourlyForecast) && <LocationName />}
+            {(forecastDataProperties.forecast !== "" && searchWeeklyForecast) && <SearchedWeeklyForecast />}
+            {(forecastDataProperties.forecastHourly !== "" && serachHourlyForecast) && <SearchedHourlyForecast />}
+          </div> :
+          <p>An error occured. Please make sure the search location is spelled correctly and using the full name.</p>}
+      </div>
+    )
   }
 
   useEffect(() => {
@@ -50,7 +71,6 @@ function App() {
         navigator.geolocation.getCurrentPosition(showPosition);
       }
     }
-    getCurrentLocation()
 
     async function getSearchedLocationData(){
       if (searchedLocation !== "" && performSearch){
@@ -63,19 +83,17 @@ function App() {
         }
       }  
     }
-    getSearchedLocationData()
 
     async function getForecastData(){
       if (searchedLocation !== "" && locationData.lat !== "" && locationData.lon !== ""){
-          const data = await fetchAllForecast(`https://api.weather.gov/points/${locationData.lat},${locationData.lon}`)
+          const data = await fetchAllForecast(locationData.lat, locationData.lon)
           if (data !== undefined){
             dispatch(forecastDataPropertiesActions(data))
-            setHasFetchError(false)
           } else {
             setHasFetchError(true)
           }
         } else if (currentLatitude !== "" && currentLongitude !== "" && searchedLocation === "" && performSearch){
-          const data = await fetchAllForecast(`https://api.weather.gov/points/${currentLatitude},${currentLongitude}`)
+          const data = await fetchAllForecast(currentLatitude, currentLongitude)
           if (data !== undefined){
             dispatch(forecastDataPropertiesActions(data))
             setHasFetchError(false)
@@ -84,28 +102,15 @@ function App() {
           }
         }
     }
+
+    getCurrentLocation()
+    getSearchedLocationData()
     getForecastData()
     setPerformSearch(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [performSearch, currentLatitude, currentLongitude, dispatch, locationData.lat, locationData.lon])
 
-  return (
-    <div className="App" data-testid="app">
-      <h1>WEATHER APP</h1>
-
-      {(currentLatitude !== '' && currentLongitude !== '') ?
-          <Search onChangeSetSearchedLocation={onChangeSetSearchedLocation} onSubmitHourlyForecast={onSubmitHourlyForecast} onSubmitWeeklyForecast={onSubmitWeeklyForecast} /> :
-          <h2>Loading...</h2>}
-
-      {((searchWeeklyForecast || serachHourlyForecast) && !hasFetchError) && <LocationName />}
-
-      {((forecastDataProperties.forecast !== "" && searchWeeklyForecast) && !hasFetchError) && <SearchedWeeklyForecast />}
-
-      {((forecastDataProperties.forecastHourly !== "" && serachHourlyForecast) && !hasFetchError) && <SearchedHourlyForecast />}
-      
-      {(hasFetchError) && <p>An error occured. Please make sure the search location is spelled correctly and using the full name.</p>}
-    </div>
-  )
+  return <div>{renderMainAppContent()}</div>
 }
 
 export default App;
