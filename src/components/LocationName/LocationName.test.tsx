@@ -83,13 +83,13 @@ const store = configureStore({
 })
 
 describe('<LocationName />', ()=>{
-    test('renders first-location-text', ()=>{
+    test('renders first location text', ()=>{
         render(<Provider store={store}><LocationName /></Provider>)
-        screen.getByTestId('first-location-text')
+        expect(screen.getByRole('heading', {name: "Location/Area: Colorado Springs, CO"})).toBeInTheDocument()
     })
 
-    test('renders second-location-text', ()=>{
+    test('renders second location text', ()=>{
         render(<Provider store={store}><LocationName /></Provider>)
-        screen.getByTestId('second-location-text')
+        expect(screen.getByText('Location/Area: Colorado Springs, CO')).toBeInTheDocument()
     })
 })

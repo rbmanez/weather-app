@@ -10,8 +10,8 @@ function LocationName(){
         <div className='location-area'>
             {(city !== '' && state !== '') &&
                 <div>
-                    <h3 data-testid='first-location-text'>Location/Area: {city}, {state}</h3>
-                    {(locationData.display_name !== '') && <p data-testid='second-location-text'>({locationData.display_name})</p>}
+                    <h3>Location/Area: {city}, {state}</h3>
+                    {(locationData.display_name !== '') && <p>({locationData.display_name})</p>}
                 </div>}
         </div>
     )

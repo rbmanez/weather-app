@@ -7,15 +7,14 @@ function Search({ onSubmitHourlyForecast, onSubmitWeeklyForecast, onChangeSetSea
                 type="text"
                 placeholder="enter full city and state name"
                 onChange={onChangeSetSearchedLocation}
-                data-testid="search-bar"
             />
 
             <div className="button-group">
-                <button type="submit" onClick={onSubmitHourlyForecast} data-testid="hourly-button">
+                <button type="submit" onClick={onSubmitHourlyForecast}>
                     Get Hourly Forecast
                 </button>
                 
-                <button type="submit" onClick={onSubmitWeeklyForecast} data-testid="weekly-button">
+                <button type="submit" onClick={onSubmitWeeklyForecast}>
                     Get Weekly Forecast
                 </button>
             </div>

@@ -83,8 +83,18 @@ const store = configureStore({
 })
 
 describe('<App />', ()=>{
-  test('renders app component', ()=>{
+  test('renders app container', ()=>{
     render(<Provider store={store}><App /></Provider>)
-    screen.getByTestId('app')
+    expect(screen.getByTestId('app')).toBeInTheDocument()
+  })
+
+  test('renders header', ()=>{
+    render(<Provider store={store}><App /></Provider>)
+    expect(screen.getByRole('heading', {name: 'WEATHER APP'})).toBeInTheDocument()
+  })
+  
+  test('renders loading', ()=>{
+    render(<Provider store={store}><App /></Provider>)
+    expect(screen.getByRole('heading', {name: 'Loading...'})).toBeInTheDocument()
   })
 })

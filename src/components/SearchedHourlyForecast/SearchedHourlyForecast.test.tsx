@@ -57,6 +57,6 @@ const store = configureStore({
 describe('<SearchedHourlyForecast />', ()=>{
     test('renders searched-hourly-forecast', ()=>{
         render(<Provider store={store}><SearchedHourlyForecast /></Provider>)
-        screen.getByTestId('searched-hourly-forecast')
+        expect(screen.getByText('Hourly Forecast')).toBeInTheDocument()
     })
 })

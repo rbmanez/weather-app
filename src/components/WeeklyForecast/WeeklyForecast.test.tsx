@@ -18,38 +18,37 @@ const singleDayForecast = {
 }
 
 describe('<WeeklyForecast />', ()=>{
-    test('renders weekly-forecast', ()=>{
+    test('renders forecast div container', ()=>{
         render(<WeeklyForecast singleDayForecast={singleDayForecast} />)
-        screen.getByTestId('weekly-forecast')
+        expect(screen.getByTestId('weekly-forecast')).toBeInTheDocument()
     })
 
-    test('renders weekly-forecast-name', ()=>{
+    test('renders forecast name', ()=>{
         render(<WeeklyForecast singleDayForecast={singleDayForecast} />)
-        screen.getByText('Today')
+        expect(screen.getByRole('heading', {name: 'Today'})).toBeInTheDocument()
     })
 
-    test('renders weekly-forecast-time', ()=>{
+    test('renders forecast startTime for date', ()=>{
         render(<WeeklyForecast singleDayForecast={singleDayForecast} />)
-        screen.getByText('2022-08-14')
+        expect(screen.getByText('2022-08-14')).toBeInTheDocument()
     })
 
-    test('renders weekly-forecast-forecast', ()=>{
+    test('renders forecast', ()=>{
         render(<WeeklyForecast singleDayForecast={singleDayForecast} />)
-        screen.getByText('Forecast: A chance of showers and thunderstorms after 1pm. Partly sunny, with a high near 91. South wind 10 to 15 mph. Chance of precipitation is 50%. New rainfall amounts less than a tenth of an inch possible.')
+        expect(screen.getByText('Forecast: A chance of showers and thunderstorms after 1pm. Partly sunny, with a high near 91. South wind 10 to 15 mph. Chance of precipitation is 50%. New rainfall amounts less than a tenth of an inch possible.')).toBeInTheDocument()
     })
 
-    test('renders weekly-forecast-temperature', ()=>{
+    test('renders forecast temperature', ()=>{
         render(<WeeklyForecast singleDayForecast={singleDayForecast} />)
-        screen.getByText('Temperature: 91 F')
+        expect(screen.getByText('Temperature: 91 F')).toBeInTheDocument()
     })
-    test('renders weekly-forecast-wind', ()=>{
+    test('renders forecast wind', ()=>{
         render(<WeeklyForecast singleDayForecast={singleDayForecast} />)
-        screen.getByText('Wind speed and direction: 10 to 15 mph S')
-    })
-
-    test('renders weekly-forecast-image', ()=>{
-        render(<WeeklyForecast singleDayForecast={singleDayForecast} />)
-        screen.getByTestId('weekly-forecast-image')
+        expect(screen.getByText('Wind speed and direction: 10 to 15 mph S')).toBeInTheDocument()
     })
 
+    test('renders forecast image', ()=>{
+        render(<WeeklyForecast singleDayForecast={singleDayForecast} />)
+        expect(screen.getByRole('img', {name: 'weather'})).toBeInTheDocument()
+    })
 })

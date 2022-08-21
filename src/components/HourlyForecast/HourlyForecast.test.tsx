@@ -18,38 +18,38 @@ const singleHourlyForecast = {
 }
 
 describe('<HourlyForecast />', ()=>{
-    test('renders hourly-forecast', ()=>{
+    test('renders forecast div container', ()=>{
         render(<HourlyForecast singleHourlyForecast={singleHourlyForecast} />)
-        screen.getByTestId('hourly-forecast')
+        expect(screen.getByTestId('hourly-forecast')).toBeInTheDocument()
     })
 
-    test('renders hourly-forecast-time', ()=>{
+    test('renders heading name for forecast time', ()=>{
         render(<HourlyForecast singleHourlyForecast={singleHourlyForecast} />)
-        screen.getByText('3:00:00 PM')
+        expect(screen.getByRole('heading', {name: '3:00:00 PM'})).toBeInTheDocument()
     })
 
-    test('renders hourly-forecast-date', ()=>{
+    test('renders forecast date', ()=>{
         render(<HourlyForecast singleHourlyForecast={singleHourlyForecast} />)
-        screen.getByText('2022-08-15')
+        expect(screen.getByText('2022-08-15')).toBeInTheDocument()
     })
 
-    test('renders hourly-forecast-forecast', ()=>{
+    test('renders forecast', ()=>{
         render(<HourlyForecast singleHourlyForecast={singleHourlyForecast} />)
-        screen.getByText('Forecast: Showers And Thunderstorms')
+        expect(screen.getByText('Forecast: Showers And Thunderstorms')).toBeInTheDocument()
     })
 
-    test('renders hourly-forecast-temperature', ()=>{
+    test('renders forecast temperature', ()=>{
         render(<HourlyForecast singleHourlyForecast={singleHourlyForecast} />)
-        screen.getByText('Temperature: 83 F')
+        expect(screen.getByText('Temperature: 83 F')).toBeInTheDocument()
     })
 
-    test('renders hourly-forecast-wind', ()=>{
+    test('renders forecast wind', ()=>{
         render(<HourlyForecast singleHourlyForecast={singleHourlyForecast} />)
-        screen.getByText('Wind speed and direction: 10 mph ESE')
+        expect(screen.getByText('Wind speed and direction: 10 mph ESE')).toBeInTheDocument()
     })
 
-    test('renders hourly-forecast-image', ()=>{
+    test('renders forecast image', ()=>{
         render(<HourlyForecast singleHourlyForecast={singleHourlyForecast} />)
-        screen.getByTestId('hourly-forecast-image')
+        expect(screen.getByRole('img', {name: 'weather'})).toBeInTheDocument()
     })
 })

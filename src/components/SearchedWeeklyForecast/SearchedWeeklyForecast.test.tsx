@@ -57,6 +57,6 @@ const store = configureStore({
 describe('<SearchedWeeklyForecast />', ()=>{
     test('renders searched-weekly-forecast', ()=>{
         render(<Provider store={store}><SearchedWeeklyForecast /></Provider>)
-        screen.getByTestId('searched-weekly-forecast')
+        expect(screen.getByText('Weekly Forecast')).toBeInTheDocument()
     })
 })
