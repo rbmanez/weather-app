@@ -1,6 +1,6 @@
 # Weather App
 
-Link to live site: [https://rbmanez.github.io/weather-app/]
+Link to live site (may ask for location permission): https://rbmanez.github.io/weather-app/
 
 This weather app shows hourly and weekly forecasts for current and custom locations. Utilizes React, Redux Toolkit, React Testing Library, Typescript, weather.gov API, nominatim.openstreetmap.org API, and Geolocation API.
 
